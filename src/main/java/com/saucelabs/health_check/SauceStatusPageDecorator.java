@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 
 /**
  * Supporting class which handles retrieving the Sauce system status to be displayed on the Jenkins UI.
- * <p/>
+ *
  * The status is only displayed on the footer of the page (via the resources/hudson/plugins/sauce_health_check/SauceStatusPageDecorator/footer.jelly file).
  *
  * @author Ross Rowe
@@ -34,7 +34,7 @@ public class SauceStatusPageDecorator extends PageDecorator {
     /**
      * Constructs a new instance.
      *
-     * @param statusHelper
+     * @param statusHelper gets teh sauce status
      */
     public SauceStatusPageDecorator(SauceStatusHelper statusHelper) {
         super();

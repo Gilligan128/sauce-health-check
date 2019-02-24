@@ -1,6 +1,6 @@
 package com.saucelabs.health_check;
 
-import com.saucelabs.ci.sauceconnect.SauceConnectTwoManager;
+import com.saucelabs.ci.sauceconnect.SauceConnectFourManager;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
@@ -41,7 +41,7 @@ public class SauceIT {
     /**
      * Handles opening and closing the <a href="http://saucelabs.com/docs/sauce-connect">Sauce Connect</a> tunnel.
      */
-    private static final SauceConnectTwoManager sauceConnectManager = new SauceConnectTwoManager();
+    private static final SauceConnectFourManager sauceConnectManager = new SauceConnectFourManager();
 
     /**
      * String representing the operating system that the test should be run against.
@@ -100,7 +100,7 @@ public class SauceIT {
      */
 //    @BeforeClass
     public static void startSauceConnect() throws IOException {
-        sauceConnectManager.openConnection("SAUCE_USER", "SAUCE_ACCESS_KEY", 4445, null, null, null, null);
+       // sauceConnectManager.openConnection("SAUCE_USER", "SAUCE_ACCESS_KEY", 4445, null, null, null, null);
     }
 
     /**
@@ -110,7 +110,7 @@ public class SauceIT {
      */
 //    @AfterClass
     public static void stopSauceConnect() throws Exception {
-        sauceConnectManager.closeTunnelsForPlan("SAUCE_USER", null);
+      //  sauceConnectManager.closeTunnelsForPlan("SAUCE_USER", null);
     }
 
     /**

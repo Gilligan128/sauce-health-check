@@ -28,10 +28,10 @@ public class SauceStatusHelper {
 
     /**
      * Retrieves the 'status_message' attribute from the Sauce system response from the Sauce REST API.
-     * <p/>
+     *
      * If the status is unable to be retrieved, then 'Unknown' is returned.
      *
-     * @return
+     * @return status message
      */
     public String retrieveSauceStatus() {
         try {
