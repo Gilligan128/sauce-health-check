@@ -8,6 +8,7 @@ import org.jvnet.hudson.test.JenkinsRule;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -24,7 +25,7 @@ import static org.junit.Assert.assertEquals;
  * but these tests could instead be configured to run against a live Jenkins environment by changing the url
  * referenced by the {@link #webDriver} instance.
  *
- * @author Ross Rowe
+ * @author Ross Rowe, Mark Henke
  */
 public class AcceptanceIT {
 
@@ -40,14 +41,14 @@ public class AcceptanceIT {
     public JenkinsRule jenkinsRule = new JenkinsRule();
 
     /**
-     * Creates a new {@link FirefoxDriver} instance, and instructs Firefox to open the URL associated with the
+     * Creates a new {@link org.openqa.selenium.chrome.ChromeDriver} instance, and instructs Firefox to open the URL associated with the
      * local Jenkins instance.
      *
      * @throws Exception thrown if an unexpected error occurs
      */
     @Before
     public void setUp() throws Exception {
-        webDriver = new FirefoxDriver();
+        webDriver = Drivers.localResourceChromeDriver();
         URL url = jenkinsRule.getURL();
         webDriver.get(url.toString());
     }

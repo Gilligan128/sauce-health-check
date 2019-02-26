@@ -33,7 +33,7 @@ import static org.junit.Assert.*;
  * tunnel, which allows Selenium tests against local websites to be run using browsers within the Sauce Labs cloud.  Sauce Connect
  * is started before the tests run (via the {@link #startSauceConnect()} method) and stopped when the tests have completed (via the {@link #stopSauceConnect()} method).
  *
- * @author Ross Rowe
+ * @author Ross Rowe, Mark Henke
  */
 @RunWith(Parameterized.class)
 public class SauceIT {

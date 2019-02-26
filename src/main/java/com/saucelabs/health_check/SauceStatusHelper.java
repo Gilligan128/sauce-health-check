@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 /**
  * Handles retrieving the Sauce Labs system status via the Sauce REST API.
  *
- * @author Ross Rowe
+ * @author Ross Rowe, Mark Henke
  */
 public class SauceStatusHelper {
 

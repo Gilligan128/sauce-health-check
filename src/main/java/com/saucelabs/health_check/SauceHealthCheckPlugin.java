@@ -7,7 +7,7 @@ import hudson.Plugin;
  *
  * No behaviour is required for this class.
  *
- * @author Ross Rowe
+ * @author Ross Rowe, Mark Henke
  */
 public class SauceHealthCheckPlugin extends Plugin {
 

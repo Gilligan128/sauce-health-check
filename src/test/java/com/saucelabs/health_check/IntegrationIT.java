@@ -21,7 +21,7 @@ import static org.junit.Assert.assertNotNull;
  * Integration tests which use Selenium to performs a minimal set of validation to ensure that
  * the plugin is installed and integrates with Jenkins correctly.
  *
- * @author Ross Rowe
+ * @author Ross Rowe, Mark Henke
  */
 public class IntegrationIT {
 
@@ -44,10 +44,13 @@ public class IntegrationIT {
      */
     @Before
     public void setUp() throws Exception {
-        webDriver = new FirefoxDriver();
+        this.webDriver = Drivers.localResourceChromeDriver();
         URL url = jenkinsRule.getURL();
         webDriver.get(url.toString());
     }
+
+
+
 
     /**
      * Verifies that the plugin has been installed correctly.

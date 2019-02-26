@@ -12,7 +12,7 @@ import java.util.logging.Logger;
  *
  * The status is only displayed on the footer of the page (via the resources/hudson/plugins/sauce_health_check/SauceStatusPageDecorator/footer.jelly file).
  *
- * @author Ross Rowe
+ * @author Ross Rowe, Mark Henke
  */
 @Extension
 public class SauceStatusPageDecorator extends PageDecorator {

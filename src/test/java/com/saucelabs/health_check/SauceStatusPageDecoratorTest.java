@@ -10,7 +10,7 @@ import static org.junit.Assert.assertEquals;
  * Unit test which validates the behaviour of the {@link SauceStatusPageDecorator} class by simulating expected responses from
  * the Sauce REST API.
  *
- * @author Ross Rowe
+ * @author Ross Rowe, Mark Henke
  */
 public class SauceStatusPageDecoratorTest {
 
