@@ -100,7 +100,7 @@ public class SauceIT {
      */
 //    @BeforeClass
     public static void startSauceConnect() throws IOException {
-       // sauceConnectManager.openConnection("SAUCE_USER", "SAUCE_ACCESS_KEY", 4445, null, null, null, null);
+        sauceConnectManager.openConnection("SAUCE_USER", "SAUCE_ACCESS_KEY", 4445, null, null, System.out, null, null);
     }
 
     /**
@@ -110,7 +110,7 @@ public class SauceIT {
      */
 //    @AfterClass
     public static void stopSauceConnect() throws Exception {
-      //  sauceConnectManager.closeTunnelsForPlan("SAUCE_USER", null);
+        sauceConnectManager.closeTunnelsForPlan("SAUCE_USER", null, System.out);
     }
 
     /**
