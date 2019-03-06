@@ -31,6 +31,11 @@ public class SauceStatusPageDecorator extends PageDecorator {
         this(new SauceStatusHelper());
     }
 
+    @Override
+    public String getDisplayName() {
+        return "Sauce Health Check Plugin";
+    }
+
     /**
      * Constructs a new instance.
      *

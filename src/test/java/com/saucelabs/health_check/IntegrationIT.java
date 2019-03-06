@@ -9,7 +9,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.net.URL;
@@ -49,9 +48,6 @@ public class IntegrationIT {
         webDriver.get(url.toString());
     }
 
-
-
-
     /**
      * Verifies that the plugin has been installed correctly.
      */
@@ -70,24 +66,23 @@ public class IntegrationIT {
         webDriver.findElement(By.linkText("Manage Jenkins")).click();
         //It takes a few seconds for the page to load, so instead of running Thread.sleep(), we use the WebDriverWait construct
         WebDriverWait wait = new WebDriverWait(webDriver, 30);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("h1")));
+        wait.until(driver -> driver.findElement(By.cssSelector("h1")).isDisplayed());
         //assert that we are on the Manage Jenkins page
         assertEquals("Header not found", "Manage Jenkins", webDriver.findElement(By.cssSelector("h1")).getText());
         //Find and click on the 'Manage Plugins' link
         webDriver.findElement(By.linkText("Manage Plugins")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Installed")));
+        wait.until(driver -> driver.findElement(By.linkText("Installed")).isDisplayed());
         //Find and click on the 'Installed' link
         webDriver.findElement(By.linkText("Installed")).click();
-        assertEquals("Plugin link not found", "Jenkins Sauce Health Check plugin", webDriver.findElement(By.linkText("Jenkins Sauce Health Check plugin")).getText());
+        assertEquals("Plugin link not found", "Sauce Health Check plugin", webDriver.findElement(By.linkText("Sauce Health Check plugin")).getText());
     }
 
     /**
      * Closes the webDriver session when the test has finished.
      *
-     * @throws Exception thrown if an unexpected error occurs
      */
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         webDriver.quit();
     }
 }

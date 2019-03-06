@@ -8,8 +8,6 @@ import org.jvnet.hudson.test.JenkinsRule;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -20,7 +18,7 @@ import static org.junit.Assert.assertEquals;
 
 /**
  * Runs a series of tests using Selenium which verify that the plugin's functionality works in a 'live' environment.
- *
+ * <p>
  * For ease of demonstration, these tests use the local Jenkins instance supplied by the {@link JenkinsRule},
  * but these tests could instead be configured to run against a live Jenkins environment by changing the url
  * referenced by the {@link #webDriver} instance.
@@ -78,17 +76,17 @@ public class AcceptanceIT {
         webDriver.findElement(By.linkText("Manage Jenkins")).click();
         //It takes a few seconds for the page to load, so instead of running Thread.sleep(), we use the WebDriverWait construct
         WebDriverWait wait = new WebDriverWait(webDriver, 30);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("h1")));
+        wait.until(driver -> driver.findElement(By.cssSelector("h1")).isDisplayed());
         assertNotNull("Status not found", webDriver.findElement(By.id("sauce_status")));
 
-        //Click the 'New Job' link using the link text as a selector
-        webDriver.findElement(By.linkText("New Job")).click();
+        //Click the 'About Jenkins' link using the link text as a selector
+        webDriver.findElement(By.linkText("About Jenkins")).click();
         assertNotNull("Status not found", webDriver.findElement(By.id("sauce_status")));
 
         //Click on the 'Jenkins' link in the navigation bar using a XPath expression
         webDriver.findElement(By.xpath("//ul[@id=\"breadcrumbs\"]//a[1]")).click();
         //wait until the 'Welcome to Jenkins' div is visible
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//td[@id='main-panel']/div[2][contains(text(), 'Welcome to Jenkins!')]")));
+        wait.until(driver -> driver.findElement(By.xpath("//div[@id='main-panel']/div[2]/h1[contains(text(), 'Welcome to Jenkins!')]")).isDisplayed());
         assertNotNull("Status not found", webDriver.findElement(By.id("sauce_status")));
 
         //Click on the UI Samples link using a CSS selector
@@ -123,19 +121,18 @@ public class AcceptanceIT {
         assertTrue("Element is not visible", sauceStatusProgressImage.isDisplayed());
         assertEquals("Status text not 'Checking'", "Checking...", sauceStatusMessage.getText());
 
-        //wait until the status
+        //wait until the status disappears
         WebDriverWait wait = new WebDriverWait(webDriver, 30);
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("sauce_status_progress")));
+        wait.until(driver -> !driver.findElement(By.id("sauce_status_progress")).isDisplayed());
         assertEquals("Status text not expected", "Basic service status checks passed.", sauceStatusMessage.getText());
     }
 
     /**
      * Closes the webDriver session when the test has finished.
      *
-     * @throws Exception thrown if an unexpected error occurs
      */
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         webDriver.quit();
     }
 }

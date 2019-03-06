@@ -82,10 +82,9 @@ public class SauceIT {
 
     /**
      * @return the browser combinations to be used for the test.
-     * @throws Exception
      */
     @Parameterized.Parameters
-    public static LinkedList browserStrings() throws Exception {
+    public static LinkedList browserStrings() {
         LinkedList browsers = new LinkedList();
         browsers.add(new String[]{"Windows 2003", null, "chrome"});
         browsers.add(new String[]{"Windows 2003", "17", "firefox"});
@@ -106,10 +105,9 @@ public class SauceIT {
     /**
      * Stops the Sauce Connect process after the tests have finished.
      *
-     * @throws Exception if an error occurrs stopping the Sauce Connect process
      */
 //    @AfterClass
-    public static void stopSauceConnect() throws Exception {
+    public static void stopSauceConnect() {
         sauceConnectManager.closeTunnelsForPlan("SAUCE_USER", null, System.out);
     }
 
@@ -159,7 +157,7 @@ public class SauceIT {
         webDriver.findElement(By.linkText("Manage Jenkins")).click();
         //It takes a few seconds for the page to load, so instead of running Thread.sleep(), we use the WebDriverWait construct
         WebDriverWait wait = new WebDriverWait(webDriver, 30);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("h1")));
+        wait.until(driver -> driver.findElement(By.cssSelector("h1")).isDisplayed());
         assertNotNull("Status not found", webDriver.findElement(By.id("sauce_status")));
 
         //Click the 'New Job' link using the link text as a selector
@@ -169,7 +167,7 @@ public class SauceIT {
         //Click on the 'Jenkins' link in the navigation bar using a XPath expression
         webDriver.findElement(By.xpath("//ul[@id=\"breadcrumbs\"]//a[1]")).click();
         //wait until the 'Welcome to Jenkins' div is visible
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//td[@id='main-panel']/div[2][contains(text(), 'Welcome to Jenkins!')]")));
+        wait.until(driver -> driver.findElement(By.xpath("//td[@id='main-panel']/div[2][contains(text(), 'Welcome to Jenkins!')]")).isDisplayed());
         assertNotNull("Status not found", webDriver.findElement(By.id("sauce_status")));
 
         //Click on the UI Samples link using a CSS selector
@@ -208,17 +206,16 @@ public class SauceIT {
 
         //wait until the status
         WebDriverWait wait = new WebDriverWait(webDriver, 30);
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("sauce_status_progress")));
+        wait.until(driver -> !driver.findElement(By.id("sauce_status_progress")).isDisplayed());
         assertEquals("Status text not expected", "Basic service status checks passed.", sauceStatusMessage.getText());
     }
 
     /**
      * Closes the webDriver session when the test has finished.
      *
-     * @throws Exception thrown if an unexpected error occurs
      */
 //    @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         webDriver.quit();
     }
 }
